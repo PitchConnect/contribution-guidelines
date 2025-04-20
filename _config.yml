@@ -1,0 +1,36 @@
+# GitHub Pages configuration for PitchConnect Contribution Guidelines
+
+# Theme
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+- jekyll-remote-theme
+
+# Site settings
+title: PitchConnect Contribution Guidelines
+description: Centralized contribution guidelines for all PitchConnect projects
+show_downloads: false
+
+# Navigation
+navbar:
+  - title: Home
+    url: /
+  - title: Code of Conduct
+    url: /CODE_OF_CONDUCT.html
+  - title: Workflow
+    url: /workflow.html
+  - title: Coding Standards
+    url: /coding-standards.html
+  - title: Pull Requests
+    url: /pull-requests.html
+  - title: AI Guidelines
+    url: /ai-guidelines.html
+
+# Exclude files from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .idea/
+  - .gitignore
+  - LICENSE
