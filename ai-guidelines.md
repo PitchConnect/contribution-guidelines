@@ -8,6 +8,8 @@ This document provides comprehensive guidelines for using AI tools in developmen
 - [For AI Assistants](#for-ai-assistants)
   - [First Steps for AI Assistants](#first-steps-for-ai-assistants)
   - [Working on Issues](#working-on-issues)
+  - [Issue and Branch Management](#issue-and-branch-management)
+  - [Commit Transparency](#commit-transparency)
   - [Code Quality and Testing](#code-quality-and-testing)
   - [Communication](#communication)
   - [GitHub CLI Usage](#github-cli-usage)
@@ -82,6 +84,21 @@ If you are an AI assistant helping with PitchConnect projects, please follow the
 - **Clean up branches**: Delete feature branches after merging PRs
 - **Clean up temporary files**: Always delete temporary markdown files and other artifacts after use
 - **Link related PRs**: If replacing one PR with another, reference the original PR and explain why
+
+### Commit Transparency
+
+- **Use "[AI]" prefix**: Start commit messages with "[AI]" when they're primarily AI-generated
+  ```bash
+  git commit -m "[AI] Add feature X that does Y"
+  ```
+- **Add co-authorship**: For collaborative work, add AI co-authorship in the commit message
+  ```bash
+  git commit -m "Add feature X that does Y
+
+  Co-authored-by: AI Assistant <ai-assistant@example.com>"
+  ```
+- **Be consistent**: Apply these conventions consistently across all AI-assisted commits
+- **Don't modify author identity**: Avoid changing the git user.name or user.email for AI commits, as this can cause confusion and technical issues
 
 ### Code Quality and Testing
 
