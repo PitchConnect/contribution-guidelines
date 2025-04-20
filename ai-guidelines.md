@@ -13,6 +13,8 @@ This document provides comprehensive guidelines for using AI tools in developmen
   - [GitHub CLI Usage](#github-cli-usage)
   - [PR Descriptions](#pr-descriptions)
   - [Security Considerations](#security-considerations)
+  - [File Management and Cleanup](#file-management-and-cleanup)
+  - [Continuous Improvement](#continuous-improvement)
 
 ## For Human Contributors Using AI
 
@@ -78,6 +80,7 @@ If you are an AI assistant helping with PitchConnect projects, please follow the
   - `docs/descriptive-name` for documentation changes
   - `refactor/descriptive-name` for code refactoring
 - **Clean up branches**: Delete feature branches after merging PRs
+- **Clean up temporary files**: Always delete temporary markdown files and other artifacts after use
 - **Link related PRs**: If replacing one PR with another, reference the original PR and explain why
 
 ### Code Quality and Testing
@@ -100,9 +103,11 @@ If you are an AI assistant helping with PitchConnect projects, please follow the
 
 When using the GitHub CLI with Markdown content, prefer passing content as files rather than streams:
 
-#### Creating Markdown Files for GitHub Content
+#### Creating and Cleaning Up Markdown Files
 
-For complex GitHub content (PR descriptions, issue templates, comments, etc.), create temporary markdown files and use them as input:
+**IMPORTANT:** Always clean up temporary markdown files after use. AI assistants often create many temporary markdown files but sometimes fail to remove them, which can clutter the repository.
+
+For complex GitHub content (PR descriptions, issue templates, comments, etc.), create temporary markdown files and use them as input, then delete them immediately after use:
 
 **For PR descriptions:**
 ```bash
@@ -184,8 +189,20 @@ EOL
 # Add a comment to a PR
 gh pr comment 123 --body-file comment.md
 
-# Clean up
+# Clean up - ALWAYS DO THIS
 rm comment.md
+
+#### Example of Proper Cleanup Script
+
+```bash
+# Script to find and clean up temporary markdown files
+find . -name "*_temp.md" -o -name "pr_*.md" -o -name "issue_*.md" -o -name "comment_*.md" | xargs rm -f
+
+# Verify cleanup
+echo "Checking for remaining temporary files..."
+find . -name "*_temp.md" -o -name "pr_*.md" -o -name "issue_*.md" -o -name "comment_*.md"
+echo "Cleanup complete."
+```
 
 ### PR Descriptions
 
@@ -202,6 +219,14 @@ rm comment.md
 - **Use secure coding practices**: Follow security best practices
 - **Consider edge cases**: Think about potential security implications
 - **Report security concerns**: Highlight any security issues you identify
+
+### File Management and Cleanup
+
+- **Clean up temporary files**: Always delete temporary files (especially markdown files) after use
+- **Verify cleanup**: Double-check that all temporary files have been removed
+- **Use descriptive file names**: When creating temporary files, use descriptive names that make their purpose clear
+- **Consider using unique prefixes**: Add a timestamp or unique identifier to temporary file names to avoid conflicts
+- **Document file creation**: When creating files, document why they're being created and how they'll be cleaned up
 
 ### Continuous Improvement
 
