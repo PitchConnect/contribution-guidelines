@@ -1,0 +1,51 @@
+# IDE files
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+tmp/
+temp/
+
+# Jekyll (for GitHub Pages)
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Node.js (if using any JS tools)
+node_modules/
+npm-debug.log
+yarn-error.log
