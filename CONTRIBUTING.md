@@ -590,20 +590,33 @@ If you need to close an issue without a PR (e.g., duplicate, won't fix), add a c
 
 When your work is not yet ready for review:
 
-1. Create a **Draft Pull Request** instead of a regular PR
-   - Use the dropdown menu next to "Create Pull Request" to select "Create Draft Pull Request"
-   - This clearly indicates your PR is a work in progress
-   - The PR cannot be merged until you mark it as ready for review
+### Creating Draft PRs
 
-2. **IMPORTANT**: Do not mark a PR as ready for review until:
+1. **Always Start with a Draft PR**
+   - When you begin working on an issue, create a draft PR immediately
+   - Use the dropdown menu next to "Create Pull Request" to select "Create Draft Pull Request"
+   - Reference the issue(s) you're working on in the PR description using keywords like "Fixes #123" or "Closes #456"
+   - This automatically labels the issue as `in-progress` and adds a comment linking to your PR
+
+2. **Benefits of Early Draft PRs**
+   - Makes your work visible to the team
+   - Automatically updates issue status
+   - Allows for early feedback
+   - Prevents duplicate work
+   - Enables CI/CD to run on your changes
+
+### Marking PRs as Ready for Review
+
+1. **IMPORTANT**: Do not mark a PR as ready for review until:
    - All CI/CD checks are passing
    - All pre-commit hooks have been run successfully
    - You have addressed any automated feedback
    - The code is fully ready for human review
 
-3. When your work is complete and all checks pass:
+2. **When your work is complete and all checks pass**:
    - Click "Ready for Review" to convert the Draft PR to a regular PR
    - This signals to reviewers that your work is ready for their attention
+   - The issue will automatically be labeled as `review-ready`
 
 ### CI/CD Pipeline Failures
 
@@ -614,6 +627,46 @@ If your PR fails CI/CD checks:
 3. Push the changes to update the PR
 4. Verify that all checks pass before marking as ready for review
 5. If the CI/CD caught issues that should have been caught by pre-commit hooks, update the pre-commit configuration as well
+
+### For AI Assistants
+
+If you are an AI assistant reading this:
+
+1. **Follow the GitFlow Process**:
+   - Create branches from develop, not main
+   - Use the correct branch naming conventions
+   - Suggest squash merging for feature/fix branches
+   - Recommend running pre-commit hooks before pushing changes
+
+2. **Always Create Draft PRs**:
+   - When starting work on an issue, create a draft PR immediately
+   - Reference the issue with "Fixes #123" or similar keywords
+   - This ensures the issue is properly tracked as in-progress
+
+3. **Monitor CI/CD Pipelines**:
+   - After pushing changes, monitor the CI/CD pipeline status
+   - Do not mark PRs as ready for review until all checks pass
+   - If checks fail, analyze the logs and fix the issues automatically
+   - Push fixes to the same branch and explain them in a PR comment
+
+4. **Maintain Code Quality**:
+   - Add comprehensive tests for all new code (both unit and integration tests)
+   - Include proper type hints
+   - Follow the project's coding style
+   - Document all public methods and functions
+   - Ensure code passes all pre-commit hooks
+
+5. **Preserve Critical Functionality**:
+   - Be cautious when modifying existing code
+   - Ensure backward compatibility
+   - Add regression tests for modified functionality
+   - Verify that API endpoints still work as expected
+
+4. **Status Reporting**:
+   - When all checks pass, report the status and ask if the PR should be marked as ready for review
+   - Include a summary of what was tested and verified
+
+Draft PRs are preferred over other methods like "WIP" in titles or special branches, as they provide a standard, built-in way to indicate work in progress.
 
 Draft PRs are preferred over other methods like "WIP" in titles or special branches, as they provide a standard, built-in way to indicate work in progress.
 
