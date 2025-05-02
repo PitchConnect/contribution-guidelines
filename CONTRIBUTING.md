@@ -493,27 +493,73 @@ AI agents should use GitHub CLI (gh) for GitHub operations whenever possible. Th
 
 ## Issue Lifecycle and Automation
 
+<a id="standardized-labels"></a>
+### Standardized Labels
+
+This project uses a standardized set of labels across all repositories to ensure consistency and clarity:
+
+#### Status Labels
+- `triage` - Needs initial review by maintainers (removed after triage)
+- `ready-for-development` - Triaged and ready for someone to work on
+- `in-progress` - Being worked on in a draft PR
+- `review-ready` - Work complete and ready for review
+- `merged-to-develop` - Merged to develop branch
+- `released` - Released to production
+
+#### Type Labels
+- `bug` - Something isn't working as expected
+- `enhancement` - New feature or improvement
+- `documentation` - Documentation changes
+- `refactor` - Code changes that neither fix a bug nor add a feature
+- `test` - Adding or improving tests
+
+#### Priority Labels
+- `priority:high` - Urgent, needs immediate attention
+- `priority:medium` - Important but not urgent
+- `priority:low` - Nice to have, can wait
+
+#### Complexity Labels
+- `complexity:easy` - Good for beginners, small scope
+- `complexity:medium` - Moderate difficulty, average scope
+- `complexity:hard` - Complex changes, large scope
+
+#### Additional Labels
+- `good-first-issue` - Good for newcomers to the project
+- `help-wanted` - Extra attention needed, looking for contributors
+- `blocked` - Blocked by another issue or external factor
+- `discussion` - Needs further discussion before work begins
+- `wontfix` - This will not be worked on
+
 <a id="issue-status-automation"></a>
 ### Issue Status Automation
 
 This project uses automation to track issue status through the development lifecycle:
 
-1. **When you create a Draft PR**:
-   - Referenced issues will automatically be labeled as `in-progress`
+1. **When an issue is created**:
+   - It will automatically be labeled as `triage`
+   - Maintainers should review the issue and add appropriate type, priority, and complexity labels
+   - After triage, maintainers should remove the `triage` label and add the `ready-for-development` label
+
+2. **When you create a Draft PR**:
+   - Referenced issues will automatically have the `ready-for-development` label removed
+   - Issues will be labeled as `in-progress`
    - A comment will be added to the issue linking to your PR
 
-2. **When you mark a PR as Ready for Review**:
+3. **When you mark a PR as Ready for Review**:
    - The `in-progress` label will be removed
    - Issues will be labeled as `review-ready`
 
-3. **When your PR is merged to `develop`**:
+4. **When your PR is merged to `develop`**:
+   - The `review-ready` label will be removed
    - Issues will be labeled as `merged-to-develop`
    - Issues will NOT be closed automatically at this stage
    - DO NOT manually close issues when merging to develop
 
-4. **When a release is created**:
+5. **When a release is created**:
    - All `merged-to-develop` issues will be automatically included in the release PR
-   - When the release is merged to `main`, issues will be automatically closed
+   - When the release is merged to `main`, the `merged-to-develop` label will be removed
+   - Issues will receive a `released` label
+   - Issues will be automatically closed
    - Issues will receive a `released` label
 
 <a id="referencing-issues-in-prs"></a>
