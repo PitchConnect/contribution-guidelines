@@ -345,9 +345,25 @@ When your work is not yet ready for review:
    - This clearly indicates your PR is a work in progress
    - The PR cannot be merged until you mark it as ready for review
 
-2. When your work is complete:
+2. **IMPORTANT**: Do not mark a PR as ready for review until:
+   - All CI/CD checks are passing
+   - All pre-commit hooks have been run successfully
+   - You have addressed any automated feedback
+   - The code is fully ready for human review
+
+3. When your work is complete and all checks pass:
    - Click "Ready for Review" to convert the Draft PR to a regular PR
    - This signals to reviewers that your work is ready for their attention
+
+### CI/CD Pipeline Failures
+
+If your PR fails CI/CD checks:
+
+1. Review the failure logs carefully
+2. Fix the issues in your branch
+3. Push the changes to update the PR
+4. Verify that all checks pass before marking as ready for review
+5. If the CI/CD caught issues that should have been caught by pre-commit hooks, update the pre-commit configuration as well
 
 Draft PRs are preferred over other methods like "WIP" in titles or special branches, as they provide a standard, built-in way to indicate work in progress.
 
