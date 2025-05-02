@@ -23,7 +23,11 @@
   - [Testing](#testing)
 - [Working with AI Assistants](#working-with-ai-assistants)
   - [When to Use AI Assistance](#when-to-use-ai-assistance)
-  - [Best Practices](#best-practices)
+- [Pre-commit Hooks](#pre-commit-hooks)
+  - [Installation](#precommit-installation)
+  - [Usage](#precommit-usage)
+  - [Common Hook Failures and Solutions](#precommit-failures)
+  - [Aligning Pre-commit Hooks with CI/CD](#precommit-cicd)  - [Best Practices](#best-practices)
   - [GitHub CLI Usage](#github-cli-usage)
 - [Issue Lifecycle and Automation](#issue-lifecycle-and-automation)
   - [Issue Status Automation](#issue-status-automation)
@@ -236,6 +240,85 @@ This project follows the GitFlow workflow:
 
 - Write unit tests for new functionality
 - Ensure existing tests pass
+## Pre-commit Hooks
+
+Pre-commit hooks are an essential tool for catching issues before they are committed to the repository. Using pre-commit hooks is **mandatory** for all contributors, including AI agents.
+
+<a id="precommit-installation"></a>
+### Installation
+
+1. Install pre-commit:
+   ```bash
+   pip install pre-commit
+   ```
+
+2. Install the hooks for the repository:
+   ```bash
+   pre-commit install
+   ```
+
+3. Verify the installation:
+   ```bash
+   pre-commit --version
+   ```
+
+<a id="precommit-usage"></a>
+### Usage
+
+Always run pre-commit hooks before creating a PR:
+
+1. Run pre-commit on all files:
+   ```bash
+   pre-commit run --all-files
+   ```
+
+2. If hooks modify files:
+   - Review the changes
+   - Stage the modified files: `git add .`
+   - Run pre-commit again to ensure all checks pass
+
+3. Only commit your changes after all pre-commit hooks pass
+
+<a id="precommit-failures"></a>
+### Common Hook Failures and Solutions
+
+| Hook | Error Message | Solution |
+|------|---------------|----------|
+| black | "would reformat file.py" | Let the hook fix it or run `black file.py` |
+| flake8 | "line too long" | Break the line into multiple lines |
+| isort | "would sort imports" | Let the hook fix it or run `isort file.py` |
+| trailing-whitespace | "trailing whitespace" | Let the hook fix it |
+| end-of-file-fixer | "no newline at end of file" | Let the hook fix it |
+
+<a id="precommit-cicd"></a>
+### Aligning Pre-commit Hooks with CI/CD
+
+If the CI/CD pipeline catches issues that weren't detected by pre-commit hooks:
+
+1. This indicates a **process problem** that needs fixing
+2. Open an issue with the "pre-commit" and "ci-cd" labels
+3. Suggest updates to the pre-commit configuration to catch similar issues in the future
+
+Example issue report:
+```
+Title: Align pre-commit hooks with CI flake8 settings
+
+Description:
+The CI pipeline caught a flake8 error about line length that wasn't caught by pre-commit hooks.
+The CI is using max-line-length=88 while our pre-commit config uses max-line-length=100.
+
+Suggested fix:
+Update .pre-commit-config.yaml to match CI settings:
+```yaml
+- repo: https://github.com/pycqa/flake8
+  rev: 6.0.0
+  hooks:
+    - id: flake8
+      args: [--max-line-length=88]
+```
+```
+
+This feedback loop is essential for continuous improvement of our development process.
 - Aim for high test coverage
 - Include integration tests where appropriate
 - Test edge cases and error conditions
@@ -261,7 +344,8 @@ When working with AI assistants:
 1. **Review all generated code** thoroughly before committing
 2. **Understand the code** before using it
 3. **Test generated code** rigorously
-4. **Provide clear instructions** to get better results
+4. **Always run pre-commit hooks** on AI-generated code
+5. **Update pre-commit hooks** if CI/CD catches issues that should have been caught locally4. **Provide clear instructions** to get better results
 5. **Break down complex tasks** into smaller chunks
 6. **Check for security issues** in generated code
 7. **Verify licensing compatibility** of suggested solutions
