@@ -670,11 +670,6 @@ Draft PRs are preferred over other methods like "WIP" in titles or special branc
 
 Draft PRs are preferred over other methods like "WIP" in titles or special branches, as they provide a standard, built-in way to indicate work in progress.
 
-## Repository-Specific Guidelines
-
-Please refer to the repository-specific section below for any additional guidelines specific to this project.
-
-<!-- END COMMON SECTION -->
 
 ## Repository-Specific Guidelines
 
